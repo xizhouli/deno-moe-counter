@@ -1,5 +1,8 @@
 # deno-moe-counter
+
 多种风格可选的萌萌计数器
+
+![deno-moe-counter](https://share-squirrel-12.deno.dev/get/@xizhouli.deno-moe-counter?theme=rule34)
 
 本项目是基于 [`https://github.com/journey-ad/Moe-Counter`](https://github.com/journey-ad/Moe-Counter) 开发的 TypeScript + DenoKV 版本
 
