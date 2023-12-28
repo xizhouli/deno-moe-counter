@@ -1,33 +1,12 @@
-import { imageSize, mimeType, path, fs, fileURLToPath } from "./deps.ts"
 import { defaultLength, defaultTheme } from './constant.ts'
+import { themeData } from "../data/theme.ts"
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
+
 const themeMap = new Map()
-const themePath = path.resolve(__dirname, '../assets/theme')
-
-fs.readdirSync(themePath).forEach(theme => {
-    const themeList = new Array()
-    const imgList = fs.readdirSync(path.resolve(themePath, theme))
-    imgList.forEach(img => {
-        const imgPath = path.resolve(themePath, theme, img)
-        const name = path.parse(img).name
-        const { width, height } = imageSize(imgPath)
-        themeList.push({
-            name,
-            width,
-            height,
-            data: convertToDataURI(imgPath)
-        })
-    })
-    themeMap.set(theme, themeList)
+Object.entries(themeData).forEach(([k, v]) => {
+    themeMap.set(k, v)
 })
 
-function convertToDataURI(path: string) {
-    const mime = mimeType.lookup(path)
-    const base64 = fs.readFileSync(path).toString('base64')
-    return `data:${mime};base64,${base64}`
-}
 
 export function getImage(num: number, theme: string = defaultTheme, len: number = defaultLength) {
     const numArray = num.toString().padStart(len, '0').split('')
